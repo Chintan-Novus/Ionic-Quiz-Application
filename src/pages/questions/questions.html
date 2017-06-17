@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Questions
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-slides>
+    <ion-slide *ngFor="let question of questions; let pageNumber = index;" style="align-items: flex-start">
+      <ion-card>
+
+        <h2 style="text-align: left; padding: 16px;"><b>Question {{pageNumber + 1}}: {{question.Question}}</b></h2>
+
+        <p></p>
+          <ion-list radio-group [(ngModel)]="question.UserAnswer">
+            <ion-item text-wrap>
+              <ion-label>1. {{question.Answer1}}</ion-label>
+              <ion-radio value="1"></ion-radio>
+            </ion-item>
+            <ion-item text-wrap>
+              <ion-label>2. {{question.Answer2}}</ion-label>
+              <ion-radio value="2"></ion-radio>
+            </ion-item>
+            <ion-item text-wrap>
+              <ion-label>3. {{question.Answer3}}</ion-label>
+              <ion-radio value="3"></ion-radio>
+            </ion-item>
+            <ion-item text-wrap>
+              <ion-label>4. {{question.Answer4}}</ion-label>
+              <ion-radio value="4"></ion-radio>
+            </ion-item>
+          </ion-list>
+      </ion-card>
+
+      <button ion-button *ngIf="pageNumber > 0" (click)="previousQuestion()">Previous Question</button>
+      <button ion-button *ngIf="pageNumber != (questions.length - 1)" [disabled]="!question.UserAnswer" (click)="nextQuestion()">Next Question</button>
+      <button ion-button *ngIf="pageNumber == (questions.length - 1)" [disabled]="!question.UserAnswer" (click)="showResult()">Finish & View Result!</button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
